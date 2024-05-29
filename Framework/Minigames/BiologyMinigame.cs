@@ -26,17 +26,22 @@ public class BiologyMinigame : MinigameDefBase
     public Text ScoreText {get; set;}
     [Element]
     public Text RealLifeText {get; set;}
+    [Element]
+    public Text RealScoreText {get; set;}
+    [Element]
+    public Text YouWon {get; set;}
     public GameObjectContainer<Rectangle> Rects {get; set;} = new();
     public GameObjectContainer<Rectangle> Rects2 {get; set;} = new();
     public GameObjectContainer<Text> TheTexts {get; set;} = new();
     public GameObjectContainer<Text> TheTexts2 {get; set;} = new();
     public GameObjectContainer<Text> LifeTexts {get; set;} = new();
     public GameObjectContainer<Text> ScoreTexts {get; set;} = new();
+    public GameObjectContainer<Text> RealScoreTexts {get; set;} = new();
     public BiologyMinigame()
     {
         ScoreText = new()
         {
-            InnerText = "Score: " + currentScore + "/5",
+            InnerText = "Score:",
             X = 100,
             Y = 200,
             FontSize = 75,
@@ -57,7 +62,7 @@ public class BiologyMinigame : MinigameDefBase
         RealLifeText = new()
         {
             InnerText = "3",
-            X = 500,
+            X = 350,
             Y = 100,
             FontSize = 75,
             FontFamily = "sans-serif",
@@ -71,9 +76,22 @@ public class BiologyMinigame : MinigameDefBase
             Y = 100,
             FontSize = 75,
             FontFamily = "sans-serif",
-            Fill = "red" 
+            Fill = "red",
+            
         };
         LifeTexts.Add(LifeText);
+
+        RealScoreText = new()
+        {
+            InnerText = "0",
+            X = 350,
+            Y = 200,
+            FontSize = 75,
+            FontFamily = "sans-serif",
+            Fill = "red",
+            
+        };
+        RealScoreTexts.Add(RealScoreText);
 
         TheText = new()
         {
@@ -84,16 +102,19 @@ public class BiologyMinigame : MinigameDefBase
             FontFamily = "sans-serif",
             Fill = "white",
             OnClick = (args) => { int x = Convert.ToInt16(RealLifeText.InnerText);
-                if (questionNumber % 2 != 0)
+                int y = Convert.ToInt16(RealScoreText.InnerText);
+                if (questionNumber % 2 != 0 && x > 0)
                 {
                     x = x - 1;
                 }
-                else
+                else if (currentScore <= 4)
                 {
+                    y = y + 1;
                     currentScore++;
                 }
                 questionNumber++;
-                RealLifeText.InnerText = x.ToString(); 
+                RealLifeText.InnerText = x.ToString();
+                RealScoreText.InnerText = y.ToString(); 
                 Update();
             }
         };    
@@ -108,16 +129,19 @@ public class BiologyMinigame : MinigameDefBase
             FontFamily = "sans-serif",
             Fill = "white",
             OnClick = (args) => { int x = Convert.ToInt16(RealLifeText.InnerText);
-                if (questionNumber % 2 == 0)
+                int y = Convert.ToInt16(RealScoreText.InnerText);
+                if (questionNumber % 2 == 0 && x > 0)
                 {
                     x = x - 1;
                 }
-                else
+                else if (currentScore <= 4)
                 {
+                    y = y + 1;
                     currentScore++;
                 }
                 questionNumber++;
                 RealLifeText.InnerText = x.ToString(); 
+                RealScoreText.InnerText = y.ToString();
                 Update();
             }
         };
