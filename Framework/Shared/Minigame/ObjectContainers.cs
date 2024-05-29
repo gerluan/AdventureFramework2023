@@ -156,6 +156,11 @@ public class GameObjectContainer<T> where T : IGameObject
 	{
 		return Elements.GetEnumerator();
 	}
+
+    internal void Add(Ellipse questionShape)
+    {
+        throw new NotImplementedException();
+    }
 }
 
 

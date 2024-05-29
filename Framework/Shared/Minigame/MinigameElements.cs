@@ -384,10 +384,11 @@ public class Rectangle : ShapeElement
 	[Html("width")] public int Width { get; set; }
 	[Html("height")] public int Height { get; set; }
 
-	// [Style("fill")] public string? Fill { get; set; }
 
-	// now inherited
-	// [Callback("onclick")] public Action<EventArgs>? OnClick { get; set; }
+    // [Style("fill")] public string? Fill { get; set; }
+
+    // now inherited
+    // [Callback("onclick")] public Action<EventArgs>? OnClick { get; set; }
 }
 
 public class Circle : ShapeElement
