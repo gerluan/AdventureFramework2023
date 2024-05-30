@@ -7,7 +7,7 @@ public class BiologyMinigame : MinigameDefBase
 {
     int currentScore = 0;
     int lives = 3;
-    int questionNumber = 1;
+    int questionNumber = 0;
     bool answer = true;
     public override string BackgroundImage {get; set;} = "/images/Cooles_Bild.JPG";
     [Element]
@@ -21,7 +21,7 @@ public class BiologyMinigame : MinigameDefBase
     [Element]
     public Text LifeText {get; set;}
     [Element]
-    public Text QuestionOne {get; set;}
+    public Text QuestionText {get; set;}
     [Element]
     public Text ScoreText {get; set;}
     [Element]
@@ -29,7 +29,7 @@ public class BiologyMinigame : MinigameDefBase
     [Element]
     public Text RealScoreText {get; set;}
     [Element]
-    public Text YouWon {get; set;}
+    public Text TitleOrVictoryOrFailure {get; set;}
     public GameObjectContainer<Rectangle> Rects {get; set;} = new();
     public GameObjectContainer<Rectangle> Rects2 {get; set;} = new();
     public GameObjectContainer<Text> TheTexts {get; set;} = new();
@@ -39,6 +39,15 @@ public class BiologyMinigame : MinigameDefBase
     public GameObjectContainer<Text> RealScoreTexts {get; set;} = new();
     public BiologyMinigame()
     {
+        TitleOrVictoryOrFailure = new()
+        {
+            InnerText = "Get 5 points to win!",
+            X = 500,
+            Y = 100,
+            FontSize = 75,
+            FontFamily = "sans-serif",
+            Fill = "yellow"
+        };
         ScoreText = new()
         {
             InnerText = "Score:",
@@ -49,14 +58,14 @@ public class BiologyMinigame : MinigameDefBase
             Fill = "red"
         };
         ScoreTexts.Add(ScoreText);
-        QuestionOne = new()
+        QuestionText = new()
         {
-            InnerText = "Ist x ein y?",
-            X = 1000,
-            Y = 100,
-            FontSize = 100,
+            InnerText = "Alle Säugetiere legen Eier",
+            X = 400,
+            Y = 400,
+            FontSize = 34,
             FontFamily = "sans-serif",
-            Fill = "green"
+            Fill = "black"
         };
         
         RealLifeText = new()
@@ -88,8 +97,7 @@ public class BiologyMinigame : MinigameDefBase
             Y = 200,
             FontSize = 75,
             FontFamily = "sans-serif",
-            Fill = "red",
-            
+            Fill = "red",            
         };
         RealScoreTexts.Add(RealScoreText);
 
@@ -103,18 +111,91 @@ public class BiologyMinigame : MinigameDefBase
             Fill = "white",
             OnClick = (args) => { int x = Convert.ToInt16(RealLifeText.InnerText);
                 int y = Convert.ToInt16(RealScoreText.InnerText);
-                if (questionNumber % 2 != 0 && x > 0)
+                string z = QuestionText.InnerText;
+                string a = TitleOrVictoryOrFailure.InnerText;
+                questionNumber++;
+                if (questionNumber % 2 != 0 && x > 1 && questionNumber == 1)
                 {
                     x = x - 1;
+                    z = "Pflanzen produzieren Sauerstoff durch Photosynthese";
                 }
-                else if (currentScore <= 4)
+                else if (questionNumber % 2 != 0 && x > 1 && questionNumber == 2)
+                {
+                    x = x - 1;
+                    z = "Ein Virus kann sich ohne einen Wirt vermehren";
+                }
+                else if (questionNumber % 2 != 0 && x > 1 && questionNumber == 3)
+                {
+                    x = x - 1;
+                    z = "Menschen haben 206 Knochen";
+                }
+                else if (questionNumber % 2 != 0 && x > 1 && questionNumber == 4)
+                {
+                    x = x - 1;
+                    z = "Pilze sind Pflanzen";
+                }
+                else if (questionNumber % 2 != 0 && x > 1 && questionNumber == 5)
+                {
+                    x = x - 1;
+                    z = "Der Herzschlag beträgt 70/min im Ruhezustand";
+                }
+                else if (questionNumber % 2 != 0 && x > 1 && questionNumber == 6)
+                {
+                    x = x - 1;
+                    z = "Fische atmen Luft durch die Lungen";
+                }
+                else if (questionNumber % 2 == 0 && y < 4 && questionNumber == 1)
                 {
                     y = y + 1;
                     currentScore++;
+                    z = "Pflanzen produtzieren Sauerstoff durch Photosynthese";
                 }
-                questionNumber++;
+                else if (questionNumber % 2 == 0 && y < 4 && questionNumber == 2)
+                {
+                    y = y + 1;
+                    currentScore++;
+                    z = "Ein Virus kann sich ohne Wirt vermehren";
+                }
+                else if (questionNumber % 2 == 0 && y < 4 && questionNumber == 3)
+                {
+                    y = y + 1;
+                    currentScore++;
+                    z = "Menschen haben 206 Knochen im Körper";
+                }
+                else if (questionNumber % 2 == 0 && y < 4 && questionNumber == 4)
+                {
+                    y = y + 1;
+                    currentScore++;
+                    z = "Pilze sind Pflanzen";
+                }
+                else if (questionNumber % 2 == 0 && y < 4 && questionNumber == 5)
+                {
+                    y = y + 1;
+                    currentScore++;
+                    z = "Der Herzschlag beträgt 70/min im Ruhezustand";
+                }
+                else if (questionNumber % 2 == 0 && y < 4 && questionNumber == 6)
+                {
+                    y = y + 1;
+                    currentScore++;
+                    z = "Fische atmen Luft durch die Lungen";
+                }
+                else if (x == 1)
+                {
+                    x = 0;
+                    z = "";
+                    a = "Game Over!";
+                }
+                else if (y == 4)
+                {
+                    y = 5;
+                    z = "";
+                    a = "You win!";
+                }
                 RealLifeText.InnerText = x.ToString();
                 RealScoreText.InnerText = y.ToString(); 
+                QuestionText.InnerText = z.ToString();
+                TitleOrVictoryOrFailure.InnerText = a.ToString();
                 Update();
             }
         };    
@@ -130,18 +211,91 @@ public class BiologyMinigame : MinigameDefBase
             Fill = "white",
             OnClick = (args) => { int x = Convert.ToInt16(RealLifeText.InnerText);
                 int y = Convert.ToInt16(RealScoreText.InnerText);
-                if (questionNumber % 2 == 0 && x > 0)
+                string z = QuestionText.InnerText;
+                string a = TitleOrVictoryOrFailure.InnerText;
+                questionNumber++;
+                if (questionNumber % 2 == 0 && x > 1 && questionNumber == 1)
                 {
                     x = x - 1;
+                    z = "Pflanzen produzieren Sauerstoff durch Photosynthese";
                 }
-                else if (currentScore <= 4)
+                else if (questionNumber % 2 == 0 && x > 1 && questionNumber == 2)
+                {
+                    x = x - 1;
+                    z = "Ein Virus kann sich ohne Wirt vermehren";
+                }
+                else if (questionNumber % 2 == 0 && x > 1 && questionNumber == 3)
+                {
+                    x = x - 1;
+                    z = "Menscheb haben 206 Knochen im Körper";
+                }
+                else if (questionNumber % 2 == 0 && x > 1 && questionNumber == 4)
+                {
+                    x = x - 1;
+                    z = "Pilze sind Pflanzen";
+                }
+                else if (questionNumber % 2 == 0 && x > 1 && questionNumber == 5)
+                {
+                    x = x - 1;
+                    z = "Der Herzschlag beträgt 70/min im Ruhezustand";
+                }
+                else if (questionNumber % 2 == 0 && x > 1 && questionNumber == 6)
+                {
+                    x = x - 1;
+                    z = "Fische atmen Luft durch die Lungen";
+                }
+                else if (questionNumber % 2 != 0 && y < 4 && questionNumber == 1)
                 {
                     y = y + 1;
                     currentScore++;
+                    z = "Pflanzen produzieren Sauerstoff durch Photosynthese";
                 }
-                questionNumber++;
+                else if (questionNumber % 2 != 0 && y < 4 && questionNumber == 2)
+                {
+                    y = y + 1;
+                    currentScore++;
+                    z = "Ein Virus kann sich ohne Wirt vermehren";
+                }
+                else if (questionNumber % 2 != 0 && y < 4 && questionNumber == 3)
+                {
+                    y = y + 1;
+                    currentScore++;
+                    z = "Menschen haben 206 Knochen im Körper";
+                }
+                else if (questionNumber % 2 != 0 && y < 4 && questionNumber == 4)
+                {
+                    y = y + 1;
+                    currentScore++;
+                    z = "Pilze sind Pflanzen";
+                }
+                else if (questionNumber % 2 != 0 && y < 4 && questionNumber == 5)
+                {
+                    y = y + 1;
+                    currentScore++;
+                    z = "Der Herzschlag beträgt 70/min im Ruhezustand";
+                }
+                else if (questionNumber % 2 != 0 && y < 4 && questionNumber == 6)
+                {
+                    y = y + 1;
+                    currentScore++;
+                    z = "Fische atmen Luft durch Lungen";
+                }
+                else if (x == 1)
+                {
+                    x = 0;
+                    z = "";
+                    a = "Game Over!";
+                }
+                else if (y == 4)
+                {
+                    y = 5;
+                    z = "";
+                    a = "You win!";
+                }
                 RealLifeText.InnerText = x.ToString(); 
                 RealScoreText.InnerText = y.ToString();
+                QuestionText.InnerText = z.ToString();
+                TitleOrVictoryOrFailure.InnerText = a.ToString();
                 Update();
             }
         };
