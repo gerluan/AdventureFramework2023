@@ -30,6 +30,10 @@ public class BiologyMinigame : MinigameDefBase
     public Text RealScoreText {get; set;}
     [Element]
     public Text TitleOrVictoryOrFailure {get; set;}
+    [Element]
+    public Text AttentionText {get; set;}
+    [Element]
+    public Text Question {get; set;}
     public GameObjectContainer<Rectangle> Rects {get; set;} = new();
     public GameObjectContainer<Rectangle> Rects2 {get; set;} = new();
     public GameObjectContainer<Text> TheTexts {get; set;} = new();
@@ -39,6 +43,16 @@ public class BiologyMinigame : MinigameDefBase
     public GameObjectContainer<Text> RealScoreTexts {get; set;} = new();
     public BiologyMinigame()
     {
+        Question = new()
+        {
+            InnerText = "Question:",
+            X = 400,
+            Y = 340,
+            FontSize = 50,
+            FontFamily = "sans-serif",
+            Fill = "green"
+        };
+
         TitleOrVictoryOrFailure = new()
         {
             InnerText = "Get 5 points to win!",
@@ -48,12 +62,21 @@ public class BiologyMinigame : MinigameDefBase
             FontFamily = "sans-serif",
             Fill = "yellow"
         };
+        AttentionText = new()
+        {
+            InnerText = "Click on the Text!",
+            X = 500,
+            Y = 200,
+            FontSize = 75,
+            FontFamily = "sans-serif",
+            Fill = "yellow"
+        };
         ScoreText = new()
         {
             InnerText = "Score:",
-            X = 100,
-            Y = 200,
-            FontSize = 75,
+            X = 5,
+            Y = 250,
+            FontSize = 65,
             FontFamily = "sans-serif",
             Fill = "red"
         };
@@ -71,9 +94,9 @@ public class BiologyMinigame : MinigameDefBase
         RealLifeText = new()
         {
             InnerText = "3",
-            X = 350,
-            Y = 100,
-            FontSize = 75,
+            X = 220,
+            Y = 150,
+            FontSize = 65,
             FontFamily = "sans-serif",
             Fill = "red" 
         };
@@ -81,9 +104,9 @@ public class BiologyMinigame : MinigameDefBase
         LifeText = new()
         {
             InnerText = "Lives: ",
-            X = 100,
-            Y = 100,
-            FontSize = 75,
+            X = 5,
+            Y = 150,
+            FontSize = 65,
             FontFamily = "sans-serif",
             Fill = "red",
             
@@ -93,9 +116,9 @@ public class BiologyMinigame : MinigameDefBase
         RealScoreText = new()
         {
             InnerText = "0",
-            X = 350,
-            Y = 200,
-            FontSize = 75,
+            X = 220,
+            Y = 250,
+            FontSize = 65,
             FontFamily = "sans-serif",
             Fill = "red",            
         };
@@ -118,79 +141,93 @@ public class BiologyMinigame : MinigameDefBase
                 {
                     x = x - 1;
                     z = "Pflanzen produzieren Sauerstoff durch Photosynthese";
+                    SoundService.PlaySound("/audio/buzzer-or-wrong-answer-20582.mp3");
                 }
                 else if (questionNumber % 2 != 0 && x > 1 && questionNumber == 2)
                 {
                     x = x - 1;
                     z = "Ein Virus kann sich ohne einen Wirt vermehren";
+                    SoundService.PlaySound("/audio/buzzer-or-wrong-answer-20582.mp3");
                 }
                 else if (questionNumber % 2 != 0 && x > 1 && questionNumber == 3)
                 {
                     x = x - 1;
                     z = "Menschen haben 206 Knochen";
+                    SoundService.PlaySound("/audio/buzzer-or-wrong-answer-20582.mp3");
                 }
                 else if (questionNumber % 2 != 0 && x > 1 && questionNumber == 4)
                 {
                     x = x - 1;
                     z = "Pilze sind Pflanzen";
+                    SoundService.PlaySound("/audio/buzzer-or-wrong-answer-20582.mp3");
                 }
                 else if (questionNumber % 2 != 0 && x > 1 && questionNumber == 5)
                 {
                     x = x - 1;
                     z = "Der Herzschlag beträgt 70/min im Ruhezustand";
+                    SoundService.PlaySound("/audio/buzzer-or-wrong-answer-20582.mp3");
                 }
                 else if (questionNumber % 2 != 0 && x > 1 && questionNumber == 6)
                 {
                     x = x - 1;
                     z = "Fische atmen Luft durch die Lungen";
+                    SoundService.PlaySound("/audio/buzzer-or-wrong-answer-20582.mp3");
                 }
                 else if (questionNumber % 2 == 0 && y < 4 && questionNumber == 1)
                 {
                     y = y + 1;
                     currentScore++;
                     z = "Pflanzen produtzieren Sauerstoff durch Photosynthese";
+                    SoundService.PlaySound("/audio/ding.wav");
                 }
                 else if (questionNumber % 2 == 0 && y < 4 && questionNumber == 2)
                 {
                     y = y + 1;
                     currentScore++;
                     z = "Ein Virus kann sich ohne Wirt vermehren";
+                    SoundService.PlaySound("/audio/ding.wav");
                 }
                 else if (questionNumber % 2 == 0 && y < 4 && questionNumber == 3)
                 {
                     y = y + 1;
                     currentScore++;
                     z = "Menschen haben 206 Knochen im Körper";
+                    SoundService.PlaySound("/audio/ding.wav");
                 }
                 else if (questionNumber % 2 == 0 && y < 4 && questionNumber == 4)
                 {
                     y = y + 1;
                     currentScore++;
                     z = "Pilze sind Pflanzen";
+                    SoundService.PlaySound("/audio/ding.wav");
                 }
                 else if (questionNumber % 2 == 0 && y < 4 && questionNumber == 5)
                 {
                     y = y + 1;
                     currentScore++;
                     z = "Der Herzschlag beträgt 70/min im Ruhezustand";
+                    SoundService.PlaySound("/audio/ding.wav");
                 }
                 else if (questionNumber % 2 == 0 && y < 4 && questionNumber == 6)
                 {
                     y = y + 1;
                     currentScore++;
                     z = "Fische atmen Luft durch die Lungen";
+                    SoundService.PlaySound("/audio/ding.wav");
                 }
                 else if (x == 1)
                 {
                     x = 0;
                     z = "";
                     a = "Game Over!";
+                    SoundService.PlayMusic("/audio/SpongeBob sad music.m4a");
                 }
                 else if (y == 4)
                 {
                     y = 5;
                     z = "";
                     a = "You win!";
+                    SoundService.PlayMusic("/audio/Yippee - Meme Sound Effect.m4a");
                 }
                 RealLifeText.InnerText = x.ToString();
                 RealScoreText.InnerText = y.ToString(); 
@@ -218,79 +255,93 @@ public class BiologyMinigame : MinigameDefBase
                 {
                     x = x - 1;
                     z = "Pflanzen produzieren Sauerstoff durch Photosynthese";
+                    SoundService.PlaySound("/audio/buzzer-or-wrong-answer-20582.mp3");
                 }
                 else if (questionNumber % 2 == 0 && x > 1 && questionNumber == 2)
                 {
                     x = x - 1;
                     z = "Ein Virus kann sich ohne Wirt vermehren";
+                    SoundService.PlaySound("/audio/buzzer-or-wrong-answer-20582.mp3");
                 }
                 else if (questionNumber % 2 == 0 && x > 1 && questionNumber == 3)
                 {
                     x = x - 1;
                     z = "Menscheb haben 206 Knochen im Körper";
+                    SoundService.PlaySound("/audio/buzzer-or-wrong-answer-20582.mp3");
                 }
                 else if (questionNumber % 2 == 0 && x > 1 && questionNumber == 4)
                 {
                     x = x - 1;
                     z = "Pilze sind Pflanzen";
+                    SoundService.PlaySound("/audio/buzzer-or-wrong-answer-20582.mp3");
                 }
                 else if (questionNumber % 2 == 0 && x > 1 && questionNumber == 5)
                 {
                     x = x - 1;
                     z = "Der Herzschlag beträgt 70/min im Ruhezustand";
+                    SoundService.PlaySound("/audio/buzzer-or-wrong-answer-20582.mp3");
                 }
                 else if (questionNumber % 2 == 0 && x > 1 && questionNumber == 6)
                 {
                     x = x - 1;
                     z = "Fische atmen Luft durch die Lungen";
+                    SoundService.PlaySound("/audio/buzzer-or-wrong-answer-20582.mp3");
                 }
                 else if (questionNumber % 2 != 0 && y < 4 && questionNumber == 1)
                 {
                     y = y + 1;
                     currentScore++;
                     z = "Pflanzen produzieren Sauerstoff durch Photosynthese";
+                    SoundService.PlaySound("/audio/ding.wav");
                 }
                 else if (questionNumber % 2 != 0 && y < 4 && questionNumber == 2)
                 {
                     y = y + 1;
                     currentScore++;
                     z = "Ein Virus kann sich ohne Wirt vermehren";
+                    SoundService.PlaySound("/audio/ding.wav");
                 }
                 else if (questionNumber % 2 != 0 && y < 4 && questionNumber == 3)
                 {
                     y = y + 1;
                     currentScore++;
                     z = "Menschen haben 206 Knochen im Körper";
+                    SoundService.PlaySound("/audio/ding.wav");
                 }
                 else if (questionNumber % 2 != 0 && y < 4 && questionNumber == 4)
                 {
                     y = y + 1;
                     currentScore++;
                     z = "Pilze sind Pflanzen";
+                    SoundService.PlaySound("/audio/ding.wav");
                 }
                 else if (questionNumber % 2 != 0 && y < 4 && questionNumber == 5)
                 {
                     y = y + 1;
                     currentScore++;
                     z = "Der Herzschlag beträgt 70/min im Ruhezustand";
+                    SoundService.PlaySound("/audio/ding.wav");
                 }
                 else if (questionNumber % 2 != 0 && y < 4 && questionNumber == 6)
                 {
                     y = y + 1;
                     currentScore++;
                     z = "Fische atmen Luft durch Lungen";
+                    SoundService.PlaySound("/audio/ding.wav");
                 }
                 else if (x == 1)
                 {
                     x = 0;
                     z = "";
                     a = "Game Over!";
+                    SoundService.PlayMusic("/audio/SpongeBob sad music.m4a");
                 }
                 else if (y == 4)
                 {
                     y = 5;
                     z = "";
                     a = "You win!";
+                    SoundService.PlayMusic("/audio/Yippee - Meme Sound Effect.m4a");
                 }
                 RealLifeText.InnerText = x.ToString(); 
                 RealScoreText.InnerText = y.ToString();
